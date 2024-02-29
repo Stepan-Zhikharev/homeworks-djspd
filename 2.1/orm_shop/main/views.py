@@ -26,7 +26,7 @@ def car_details_view(request, car_id):
 def sales_by_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)  # Получаем объект Car по его id
     try:
-        sales = Sale.objects.filter(car=car)  # Получаем все продажи для данного автомобиля
+        sales = list(Sale.objects.filter(car=car))  # Получаем все продажи для данного автомобиля
         clients = []
         for sale in sales:
             clients.extend(sale.client.all())
