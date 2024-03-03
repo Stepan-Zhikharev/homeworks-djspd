@@ -22,6 +22,7 @@ from main.views import (books_list, CreateBookView, BookDetailsView, BookUpdateV
                         BookDeleteView, OrderViewSet)
 
 router = SimpleRouter()
+router.register('orders', OrderViewSet)
 #зарегистрируйте вьюсет для заказов
 
 
@@ -32,5 +33,5 @@ urlpatterns = [
     path('api/v1/books/<int:pk>/', BookDetailsView.as_view()),
     path('api/v1/books/update/<int:pk>/', BookUpdateView.as_view()),
     path('api/v1/books/delete/<int:pk>/', BookDeleteView.as_view()),
-    include('api/v1/', router.urls)
-]
+    path('api/v1/', include(router.urls))
+] + router.urls
