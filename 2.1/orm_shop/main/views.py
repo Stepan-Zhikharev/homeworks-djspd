@@ -26,14 +26,10 @@ def car_details_view(request, car_id):
 def sales_by_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)  # Получаем объект Car по его id
     try:
-        sales = list(Sale.objects.filter(car=car))  # Получаем все продажи для данного автомобиля
-        clients = []
-        for sale in sales:
-            clients.extend(sale.client.all())
+        sales = Sale.objects.filter(car=car)  # Получаем все продажи для данного автомобиля
         context = {
             'car': car,  # Передаем объект Car в контекст шаблона
             'sales': sales,  # Передаем список продаж в контекст шаблона
-            'clients': clients,  # Передаем список клиентов в контекст шаблона
         }
         template_name = 'main/sales.html'
         return render(request, template_name, context)  # передайте необходимый контекст

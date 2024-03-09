@@ -65,8 +65,8 @@ class Car(models.Model):
 
 class Sale(models.Model):
     id = models.AutoField(primary_key=True)
-    client = models.ManyToManyField('Client')
-    car = models.ManyToManyField('Car')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f'Sale - {self.id} at {self.created_at} {self.client}'
